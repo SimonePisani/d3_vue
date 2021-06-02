@@ -18,7 +18,7 @@ export default {
 
     //  select the visual environment
     const svg = d3.select('#viz');
-    
+
     const scaleLenght = d3.scaleLinear()
         // setting a min and a max value
         .domain([0, d3.max(numbers)])
