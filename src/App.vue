@@ -18,14 +18,7 @@ export default {
 
     //  select the visual environment
     const svg = d3.select('#viz');
-
-
-    //   ****** creating the bars ******
-    //  join my data
-    const rects = svg.selectAll('rect')
-        .data(numbers)
-        .join('rect');
-    //  enter + exit + update: join()
+    
     const scaleLenght = d3.scaleLinear()
         // setting a min and a max value
         .domain([0, d3.max(numbers)])
@@ -42,6 +35,15 @@ export default {
         //apply a padding to our visual representations
         .paddingInner(0.05)
         .paddingOuter(0.05);
+
+
+    //   ****** creating the bars ******
+    //  join my data
+    const rects = svg.selectAll('rect')
+        .data(numbers)
+        .join('rect');
+    //  enter + exit + update: join()
+
 
     rects
         .attr('x', 20)
