@@ -26,17 +26,24 @@ export default {
     const scaleLenght = d3.scaleLinear()
         // setting a min and a max value
         .domain([0, d3.max(numbers)])
-        // setting a min and a max value for our rappresentation
-        .range([0, 400]);
+        // setting a min and a max value for our representation
+        .range([0, 600]);
 
-    const scalePosition = function (d, i){
-      return 20 * i + 20;
-    }
+    const scalePos = d3.scaleBand()
+        //setting our ordinal values
+        .domain([0,1,2,3,4])
+        //setting a min and a max values for our visual representations 
+        .range([0, 573])
+        //delete any decimal values
+        .round(true)
+        //apply a padding to our visual representations
+        .paddingInner(0.05)
+        .paddingOuter(0.05);
 
     rects
         .attr('x', 20)
-        .attr('height', 19)
-        .attr('y', scalePosition)
+        .attr('height', scalePos.bandwidth())
+        .attr('y', (d,i) => scalePos(i))
         .attr('width', scaleLenght)
   }
 }
