@@ -13,11 +13,14 @@ export default {
   components: {
 
   },
-  mounted() {
-    let numbers=[150,250,160,80,200];
+  mounted: function () {
+    let numbers = [150, 250, 160, 80, 200, 300, 120, 240];
 
     //  select the visual environment
     const svg = d3.select('#viz');
+
+
+    //   ****** creating the bars ******
     //  join my data
     const rects = svg.selectAll('rect')
         .data(numbers)
@@ -43,8 +46,23 @@ export default {
     rects
         .attr('x', 20)
         .attr('height', scalePos.bandwidth())
-        .attr('y', (d,i) => scalePos(i))
+        .attr('y', (d, i) => scalePos(i))
         .attr('width', scaleLenght)
+        .attr('fill', '#0c8e8e');
+
+
+    //  ******* create the text labels ********
+    const labels = svg.selectAll('text')
+        .data(numbers)
+        .join('text');
+
+    labels
+    .text((d) => d)
+    .attr('x', scaleLenght)
+    .attr('y', (d,i) => scalePos(i))
+    .attr('dy', scalePos.bandwidth() / 2)
+    .attr('dx', -20);
+
   }
 }
 </script>
