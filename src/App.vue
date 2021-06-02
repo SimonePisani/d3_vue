@@ -31,9 +31,9 @@ export default {
 
     const scalePos = d3.scaleBand()
         //setting our ordinal values
-        .domain([0,1,2,3,4])
-        //setting a min and a max values for our visual representations 
-        .range([0, 573])
+        .domain(d3.range(numbers.length))
+        //setting a min and a max values for our visual representations
+        .range([0, 300])
         //delete any decimal values
         .round(true)
         //apply a padding to our visual representations
