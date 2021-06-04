@@ -19,14 +19,12 @@ export default {
     //  select the visual environment
     const svg = d3.select('#viz');
 
-    // eslint-disable-next-line no-unused-vars
     const scaleLenght = d3.scaleLinear()
         // setting a min and a max value
         .domain([0, d3.max(numbers)])
         // setting a min and a max value for our representation
         .range([0, 600]);
 
-    // eslint-disable-next-line no-unused-vars
     const scalePos = d3.scaleBand()
         //setting our ordinal values
         .domain(d3.range(numbers.length))
@@ -41,42 +39,21 @@ export default {
 
     // ******* Create g groups ********
     // G is an element widely used in visual representation, each g contains one of our bars, we arent getting all the possible gs within our visualization but only those that have a specific class called "bars".
-    // eslint-disable-next-line no-unused-vars
     const gs = svg.selectAll('g.bars')
-    .data(numbers)
-    .join('g').attr('class', 'bars');
+        .data(numbers)
+        .join('g').attr('class', 'bars');
 
-    gs.attr('transform', (d,i) => `translate(0, ${scalePos(i)})`)
+    gs.attr('transform', (d,i) => `translate(20, ${scalePos(i)})`);
 
+    gs.append('rect')
+        .attr('height', scalePos.bandwidth())
+        .attr('width', scaleLenght)
+        .attr('fill', '#0c8e8e');
 
-    // //   ****** creating the bars ******
-    // //  join my data
-    // const rects = svg.selectAll('rect')
-    //     .data(numbers)
-    //     .join('rect');
-    // //  enter + exit + update: join()
-    //
-    //
-    // rects
-    //     .attr('x', 20)
-    //     .attr('height', scalePos.bandwidth())
-    //     .attr('y', (d, i) => scalePos(i))
-    //     .attr('width', scaleLenght)
-    //     .attr('fill', '#0c8e8e');
-    //
-    //
-    // //  ******* create the text labels ********
-    // const labels = svg.selectAll('text')
-    //     .data(numbers)
-    //     .join('text');
-    //
-    // labels
-    // .text((d) => d)
-    // .attr('x', scaleLenght)
-    // .attr('y', (d,i) => scalePos(i))
-    // .attr('dy', scalePos.bandwidth() / 2)
-    // .attr('dx', -20);
-
+    gs.append('text')
+        .text((d) => d)
+        .attr('y', scalePos.bandwidth()/2)
+        .attr('x', scaleLenght);
   }
 }
 </script>
