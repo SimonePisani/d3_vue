@@ -14,7 +14,7 @@ export default {
 
   },
   mounted: function () {
-    let numbers = [150, 250, 160, 80, 200, 300, 120, 240];
+    let numbers = [150, 250, 160, 80, 200, 300, 120, 240, 1000, 13];
 
     //  select the visual environment
     const svg = d3.select('#viz');
@@ -24,6 +24,8 @@ export default {
         .domain([0, d3.max(numbers)])
         // setting a min and a max value for our representation
         .range([0, 600]);
+
+    const lAxis = d3.axisTop(scaleLenght);
 
     const scalePos = d3.scaleBand()
         //setting our ordinal values
@@ -38,12 +40,18 @@ export default {
 
 
     // ******* Create g groups ********
+    svg.append('g')
+        .attr('class', 'lAxis')
+        .attr('transform', 'translate(20, 20)')
+        .call(lAxis);
+
+
     // G is an element widely used in visual representation, each g contains one of our bars, we arent getting all the possible gs within our visualization but only those that have a specific class called "bars".
     const gs = svg.selectAll('g.bars')
         .data(numbers)
         .join('g').attr('class', 'bars');
 
-    gs.attr('transform', (d,i) => `translate(20, ${scalePos(i)})`);
+    gs.attr('transform', (d,i) => `translate(20, ${30 + scalePos(i)})`);
 
     gs.append('rect')
         .attr('height', scalePos.bandwidth())
