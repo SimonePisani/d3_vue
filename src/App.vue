@@ -16,7 +16,7 @@
       </b-row>
       <b-row>
         <b-col class="mt-5">
-          <svg id="viz" height="600" width="900"></svg>
+          <svg id="viz" :height="height" :width="width"></svg>
         </b-col>
       </b-row>
     </b-container>
@@ -37,7 +37,9 @@ export default {
   // store is an element that generate a data section that stores all data of my component. Is a function that
   data(){
     return {
-      numbers: [100, 250, 160, 80, 200]
+      numbers: [100, 250, 160, 80, 200],
+      width: 650,
+      height: 300,
     }
   },
 
@@ -53,7 +55,7 @@ export default {
   methods: {
     refreshChart(listOfNumbers){
       //  select the visual environment
-      const barChart = chart().width(800).height(600);
+      const barChart = chart().width(this.width).height(this.height);
       d3.select('#viz').datum(listOfNumbers).call(barChart);
     },
     shuffleNumbers() {

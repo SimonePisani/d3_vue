@@ -43,7 +43,7 @@ function chart(){
             .data(numbers)
             .join('g').attr('class', 'bars');
 
-        gs.attr('transform', (d,i) => `translate(20, ${30 + scalePos(i)})`);
+        gs.attr('transform', (d,i) => `translate(20, ${20 + scalePos(i)})`);
 
         gs.selectAll('rect')
             .data((d) => [d])
@@ -70,7 +70,7 @@ function chart(){
     my.height = function (value){
         if(!arguments.length) return height;
         height = value;
-        scalePos.range([0, height]);
+        scalePos.range([0, height - 50]);
         return my;
     }
 
